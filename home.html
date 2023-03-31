@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 首页配置 &mdash; anclient-session 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="5. 菜单配置" href="menus.html" />
+    <link rel="prev" title="3. 登录配置" href="login.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            anclient-session
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">3. 登录配置</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 首页配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sk">4.1. 关联sk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.2. 全局变量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.3. 主题样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.4. 图标样式</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">5. 菜单配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">6. 用户管理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">anclient-session</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>首页配置</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">4. </span>首页配置<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="sk">
+<h2><span class="section-number">4.1. </span>关联sk<a class="headerlink" href="#sk" title="此标题的永久链接"></a></h2>
+<p>在前端 <code class="docutils literal notranslate"><span class="pre">app.tsx</span></code> 中关联所有字典的 sk，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">anClient</span><span class="p">.</span><span class="nx">getSks</span><span class="p">((</span><span class="nx">sks</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                      </span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">,</span><span class="w"> </span><span class="nx">sks</span><span class="p">);</span>
+<span class="w">                      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sks</span><span class="p">);</span>
+<span class="w">              </span><span class="p">},</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">errorCtx</span><span class="p">);</span>
+
+<span class="w">              </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">xvec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;x.cube.vec&#39;</span><span class="p">;</span>
+<span class="w">              </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbOrg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;org.all&#39;</span><span class="p">;</span>
+<span class="w">              </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbRole</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;roles&#39;</span><span class="p">;</span>
+<span class="w">              </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbMyClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;north.my-class&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在后端 <code class="docutils literal notranslate"><span class="pre">dataset.xml</span></code> 配置字典的 sk，举例：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;c&gt;</span>
+<span class="w">  </span><span class="nt">&lt;sk&gt;</span>org.all<span class="nt">&lt;/sk&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mysql&gt;</span>select<span class="w"> </span>orgId<span class="w"> </span>value,<span class="w"> </span>orgName<span class="w"> </span>text<span class="w"> </span>from<span class="w"> </span>a_orgs<span class="nt">&lt;/mysql&gt;</span>
+<span class="nt">&lt;/c&gt;</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>配置好关联后，前端就可以使用 Protocol.sk.cbbOrg 来获取 &lt;sk&gt;org.all&lt;/sk&gt;的查询结果了</p>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">4.2. </span>全局变量<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>在首页 <code class="docutils literal notranslate"><span class="pre">app.tsx</span></code> 中配置全局变量，使所有子节点都可以直接访问，举例：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AnContext.Provider value={{</span>
+<span class="go">        ssInf: undefined,</span>
+<span class="go">        pageOrigin: window ? window.origin : &#39;localhost&#39;,</span>
+<span class="go">        servId: this.state.servId,</span>
+<span class="go">        servs: this.props.servs,</span>
+<span class="go">        anClient: this.anClient, // as typeof SessionClient | Inseclient,</span>
+<span class="go">        uiHelper: this.anReact,</span>
+<span class="go">        hasError: this.state.hasError,</span>
+<span class="go">        iparent: this.props.iparent,</span>
+<span class="go">        ihome: this.props.iportal || &#39;portal.html&#39;,</span>
+<span class="go">        error: this.errorCtx,</span>
+<span class="go">}}&gt;</span>
+
+<span class="go">&lt;/AnContext.Provider&gt;</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>子节点需要先设置 Comp.contextType = AnContext； 然后再使用 this.context 访问全局变量</p>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">4.3. </span>主题样式<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>在主题文件 <code class="docutils literal notranslate"><span class="pre">styles.tsx</span></code> 中配置统一的样式，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">JsampleTheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">responsiveFontSizes</span><span class="p">(</span><span class="nx">createTheme</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">primary</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">light</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#fff&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">main</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;rgb(23, 105, 170)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">dark</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#000&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">secondary</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">main</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#f44336&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">breakpoints</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">values</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">xs</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">sm</span><span class="o">:</span><span class="w"> </span><span class="mf">600</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">md</span><span class="o">:</span><span class="w"> </span><span class="mf">960</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">lg</span><span class="o">:</span><span class="w"> </span><span class="mf">1280</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">xl</span><span class="o">:</span><span class="w"> </span><span class="mf">1920</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">}));</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>参数解析：
+1、palette为调色板，主要有五种类型：Primary、Secondary、Error、Warning、Info、Success
+2、breakpoints为断点，xs表示超小屏、sm表示小屏、md表示中屏、lg表示大屏、xl表示超大屏
+3、breakpoints默认单位为px，（md:960 表示屏幕宽度在 960px~1280px 之间为中屏）
+4、可以设置组件在不同的断点区域所占的宽度不同，比如在lg大屏时宽度为33%，sm小屏时宽度为100%
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p><a class="reference external" href="https://v4.mui.com/zh/customization/theming/">更多请查看 Material-UI 官网：https://v4.mui.com/zh/customization/theming/</a></p>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">4.4. </span>图标样式<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>在主题文件 <code class="docutils literal notranslate"><span class="pre">styles.tsx</span></code> 中定义统一的图标样式，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">JsampleIcons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">Add</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">AddBox</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Check</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Check</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Clear</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Clear</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Delete</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">DeleteOutline</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Close</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Close</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Edit</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Edit</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Export</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">SaveAlt</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Filter</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">FilterList</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">FirstPage</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">FirstPage</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">LastPage</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">LastPage</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">NextPage</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ChevronRight</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">DetailPanel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ChevronRight</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">PreviousPage</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ChevronLeft</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">ResetSearch</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Clear</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">ViewColumn</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ViewColumn</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">ItemCollapse</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">FormatLineSpacingIcon</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Search</span><span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Search</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">SortArrow</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ArrowDownward</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">ThirdStateCheck</span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Remove</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Worksheet</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">GridOnIcon</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">ListAdd</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">PlaylistAddIcon</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Star</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">StarBorder</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Up</span><span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ArrowUpwardIcon</span><span class="w">  </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">),</span>
+<span class="nx">Down</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="nx">forwardRef</span><span class="o">&lt;</span><span class="nx">SVGSVGElement</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">onClick</span><span class="o">?:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">DefaultComponentProps</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;&gt;</span><span class="p">((</span><span class="nx">props</span><span class="p">,</span><span class="w"> </span><span class="nx">ref</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ArrowDownwardIcon</span><span class="w"> </span><span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="w"> </span><span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">ref</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">)</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<img alt="_images/icon.png" src="_images/icon.png" />
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>定义的图标都是透明背景，可以自定义颜色。</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="login.html" class="btn btn-neutral float-left" title="3. 登录配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="menus.html" class="btn btn-neutral float-right" title="5. 菜单配置" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, hjp.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

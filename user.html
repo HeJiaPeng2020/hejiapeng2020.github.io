@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. 用户管理 &mdash; anclient-session 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="5. 菜单配置" href="menus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            anclient-session
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">3. 登录配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">4. 首页配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">5. 菜单配置</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. 用户管理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">6.1. 添加数据入口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">6.2. 定义查询组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">6.3. 定义查询方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">6.4. 关联前后端</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">6.5. 调用表格组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">6.6. 定义表格的列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#form">6.7. 定义form表单</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">6.8. 提交form表单</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">anclient-session</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>用户管理</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">6. </span>用户管理<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="id2">
+<h2><span class="section-number">6.1. </span>添加数据入口<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>在首页 <code class="docutils literal notranslate"><span class="pre">app.tsx</span></code> 中添加用户管理的Servlet，举例：users.tier</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">anReact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AnReactExt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anClient</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">errorCtx</span><span class="p">)</span>
+<span class="w">                      </span><span class="p">.</span><span class="nx">extendPorts</span><span class="p">({</span>
+<span class="w">                              </span><span class="nx">menu</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;menu.serv&quot;</span><span class="p">,</span>
+<span class="w">                              </span><span class="nx">userstier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;users.tier&quot;</span><span class="p">,</span>
+<span class="w">                              </span><span class="nx">gpatier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gpa.tier&quot;</span><span class="p">,</span>
+<span class="w">                              </span><span class="nx">mykidstier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;mykids.tier&quot;</span>
+<span class="w">                      </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>在后端创建 Servlet 类，举例：UsersTier.java</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@WebServlet</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Semantic tier: users&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">urlPatterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;/users.tier&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersTier</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ServPort</span><span class="o">&lt;</span><span class="n">UserstReq</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+
+<span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">DATranscxt</span><span class="w"> </span><span class="n">st</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mtabl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a_users&quot;</span><span class="p">;</span>
+
+<span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DATranscxt</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SemanticException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SAXException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="nf">UsersTier</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">Port</span><span class="p">.</span><span class="na">userstier</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">......</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>新框架的数据处理都放到后端了，前端只需把参数传给后端，后端处理后把结果返给前端</p>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">6.2. </span>定义查询组件<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>在用户管理组件中定义查询组件，需要继承 CrudCompW 类，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">UsersQuery</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">CrudCompW</span><span class="o">&lt;</span><span class="nx">Comprops</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">{</span><span class="nx">pageInf</span><span class="o">:</span><span class="w"> </span><span class="nx">PageInf</span><span class="p">,</span><span class="w"> </span><span class="nx">onQuery</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">conds</span><span class="o">:</span><span class="w"> </span><span class="nx">PageInf</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">}</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">conds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userName&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userName&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Student&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">grid</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">sm</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">md</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AnlistColAttrs</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">,</span><span class="w"> </span><span class="nx">any</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;orgId&#39;</span><span class="p">,</span><span class="w">    </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;orgId&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;cbb&#39;</span><span class="p">,</span><span class="w">  </span><span class="nx">val</span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">sk</span><span class="o">:</span><span class="w"> </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbOrg</span><span class="p">,</span><span class="w"> </span><span class="nx">nv</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">},</span><span class="w"> </span><span class="nx">grid</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">sm</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="nx">md</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">ComboCondType</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// { name: &#39;roleId&#39;,   field: &#39;roleId&#39;, type: &#39;cbb&#39;,  val: undefined, label: L(&#39;Role&#39;),</span>
+<span class="w">        </span><span class="c1">//   sk: Protocol.sk.cbbRole, nv: {n: &#39;text&#39;, v: &#39;value&#39;}, grid: {md: 2, sm: 3} },</span>
+<span class="p">];</span>
+</pre></div>
+</div>
+<img alt="_images/query.png" src="_images/query.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>conds 里面配置的就是查询条件，其中field表示字段名，其中label查询框内文本，
+type表示字段类型（cbb表示下拉框，如果配置了sk，会自动填充下拉框数据）</p>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">6.3. </span>定义查询方法<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>① 在前端组件中定义查询列表的方法 toSearch()，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">toSearch</span><span class="p">(</span><span class="nx">_condts</span><span class="o">:</span><span class="w"> </span><span class="nx">PageInf</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">tier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">&quot;really happens?&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">tier</span><span class="p">.</span><span class="nx">records</span><span class="p">(</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">q</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="nx">_cols</span><span class="p">,</span><span class="w"> </span><span class="nx">_rows</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">that</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">selected</span><span class="p">.</span><span class="nx">ids</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="w">                        </span><span class="nx">that</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="w"> </span><span class="p">{</span><span class="nx">buttons</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">add</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">edit</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">del</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}}</span><span class="w"> </span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>② 在前端 UsersTier 类中定义查询列表方法 records()，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">records</span><span class="p">(</span><span class="nx">conds</span><span class="o">:</span><span class="w"> </span><span class="nx">PageInf</span><span class="p">,</span><span class="w"> </span><span class="nx">onLoad</span><span class="o">:</span><span class="w"> </span><span class="nx">OnLoadOk</span><span class="o">&lt;</span><span class="nx">Tierec</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">client</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">userReq</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span>
+<span class="w">                                </span><span class="ow">new</span><span class="w"> </span><span class="nx">UserstReq</span><span class="p">(</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">uri</span><span class="p">,</span><span class="w"> </span><span class="nx">conds</span><span class="w"> </span><span class="p">)</span>
+<span class="w">                                </span><span class="p">.</span><span class="nx">A</span><span class="p">(</span><span class="nx">UserstReq</span><span class="p">.</span><span class="nx">A</span><span class="p">.</span><span class="nx">records</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">client</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="kd">let</span><span class="w"> </span><span class="p">{</span><span class="nx">cols</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">AnsonResp</span><span class="p">.</span><span class="nx">rs2arr</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">().</span><span class="nx">Rs</span><span class="p">());</span>
+<span class="w">                        </span><span class="nx">that</span><span class="p">.</span><span class="nx">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rows</span><span class="p">;</span>
+<span class="w">                        </span><span class="nx">conds</span><span class="p">.</span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">Rs</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">total</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">                        </span><span class="nx">onLoad</span><span class="p">(</span><span class="nx">cols</span><span class="p">,</span><span class="w"> </span><span class="nx">rows</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Tierec</span><span class="p">[]);</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">errCtx</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>③ 在后端 UsersTier.java 中定义查询列表方法 records()，举例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">protected</span><span class="w"> </span><span class="n">AnsonResp</span><span class="w"> </span><span class="nf">records</span><span class="p">(</span><span class="n">UserstReq</span><span class="w"> </span><span class="n">jreq</span><span class="p">,</span><span class="w"> </span><span class="n">IUser</span><span class="w"> </span><span class="n">usr</span><span class="p">)</span>
+<span class="w">                </span><span class="kd">throws</span><span class="w"> </span><span class="n">SemanticException</span><span class="p">,</span><span class="w"> </span><span class="n">TransException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Query</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="na">select</span><span class="p">(</span><span class="n">mtabl</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;u&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">page</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">page</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">col</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">).</span><span class="na">col</span><span class="p">(</span><span class="s">&quot;userName&quot;</span><span class="p">).</span><span class="na">col</span><span class="p">(</span><span class="s">&quot;orgName&quot;</span><span class="p">).</span><span class="na">col</span><span class="p">(</span><span class="s">&quot;roleName&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">l</span><span class="p">(</span><span class="s">&quot;a_orgs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;o&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;o.orgId = u.orgId&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">l</span><span class="p">(</span><span class="s">&quot;a_roles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r.roleId = u.roleId&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">LangExt</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">userName</span><span class="p">))</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">whereLike</span><span class="p">(</span><span class="s">&quot;userName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">userName</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">LangExt</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">userId</span><span class="p">))</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">whereEq</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">userId</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">LangExt</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">roleId</span><span class="p">))</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">whereEq</span><span class="p">(</span><span class="s">&quot;u.roleId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">roleId</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">LangExt</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">orgId</span><span class="p">))</span>
+<span class="w">                </span><span class="n">q</span><span class="p">.</span><span class="na">whereEq</span><span class="p">(</span><span class="s">&quot;u.orgId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">orgId</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">AnResultset</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">AnResultset</span><span class="p">)</span><span class="w"> </span><span class="n">q</span>
+<span class="w">                </span><span class="p">.</span><span class="na">rs</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="na">instancontxt</span><span class="p">(</span><span class="n">Connects</span><span class="p">.</span><span class="na">uri2conn</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">uri</span><span class="p">()),</span><span class="w"> </span><span class="n">usr</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">rs</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AnsonResp</span><span class="p">().</span><span class="na">rs</span><span class="p">(</span><span class="n">rs</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>前端查询框内的值，后端可以直接调用 jreq.xxx 获取（xxx一般为前端conds里配置的name）</p>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">6.4. </span>关联前后端<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p>前后端能关联的必须条件：前端定义的 <code class="docutils literal notranslate"><span class="pre">UserstReq.A</span></code> 与后端定义的 <code class="docutils literal notranslate"><span class="pre">UserstReq.A</span></code> 要对应起来！</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">前端定义的UserstReq.A</span><a class="headerlink" href="#id9" title="此代码块的永久链接"></a></div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="w">     </span><span class="k">static</span><span class="w"> </span><span class="nx">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nx">records</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;records&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">rec</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rec&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">update</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">insert</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">del</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">,</span>
+<span class="w">     </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">后端定义的UserstReq.A</span><a class="headerlink" href="#id10" title="此代码块的永久链接"></a></div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="cm">/** Ask for loading records */</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">records</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;records&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="cm">/** Ask for loading a rec */</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rec&quot;</span><span class="p">;</span>
+
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;u&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">avatar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;u/avatar&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">insert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>通用方法的名称约定如下，其余方法名可自定义：</p>
+<ul class="simple">
+<li><p>records 表示查询列表（带分页的，前端传page和size即可）</p></li>
+<li><p>rec 查询单条记录</p></li>
+<li><p>update 修改单条记录</p></li>
+<li><p>insert 新增单条记录</p></li>
+<li><p>del 删除单条或多条记录</p></li>
+</ul>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">6.5. </span>调用表格组件<a class="headerlink" href="#id6" title="此标题的永久链接"></a></h2>
+<p>直接调用封装好的表格组件 AnTablPager，举例：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;AnTablPager
+        pk={tier.pkval.pk}
+        className={classes.root}
+        checkbox={tier.checkbox}
+        selected={this.state.selected}
+        columns={tier.columns()}
+        rows={tier.rows}
+        sizeOptions={[5, 8, 10]}
+        pageInf={this.q}
+        onPageChange={this.onPageInf}
+        onSelectChange={this.onTableSelect}
+/&gt;
+</pre></div>
+</div>
+<img alt="_images/table1.png" src="_images/table1.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>rows为查询组件的返回结果，sizeOptions为每页行数，pageInf为分页信息</p>
+</div>
+</section>
+<section id="id7">
+<h2><span class="section-number">6.6. </span>定义表格的列<a class="headerlink" href="#id7" title="此标题的永久链接"></a></h2>
+<p>表格中的列需要在 <code class="docutils literal notranslate"><span class="pre">UsersTier</span></code> 中单独定义，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;check&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userId&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">checkbox</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Log Id&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userId&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;User Name&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userName&#39;</span><span class="w"> </span><span class="p">},</span>
+
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Organization&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;orgName&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">sk</span><span class="o">:</span><span class="w"> </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbOrg</span><span class="p">,</span><span class="w"> </span><span class="nx">nv</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Role&#39;</span><span class="p">),</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;roleName&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">sk</span><span class="o">:</span><span class="w"> </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbRole</span><span class="p">,</span><span class="w"> </span><span class="nx">nv</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nb">Array</span><span class="o">&lt;</span><span class="nx">AnlistColAttrs</span><span class="o">&lt;</span><span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">,</span><span class="w"> </span><span class="nx">CompOpts</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<img alt="_images/table1.png" src="_images/table1.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>label为表头的名称，field为数据库字段</p>
+</div>
+</section>
+<section id="form">
+<h2><span class="section-number">6.7. </span>定义form表单<a class="headerlink" href="#form" title="此标题的永久链接"></a></h2>
+<p>在 <code class="docutils literal notranslate"><span class="pre">UsersTier</span></code> 配置好字段后，在详情页面调用 TRecordForm 组件，即可自动生成表单：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">_fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userId&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Log ID&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">validator</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">len</span><span class="o">:</span><span class="w"> </span><span class="mf">20</span><span class="p">,</span><span class="w"> </span><span class="nx">notNull</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;userName&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;User Name&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pswd&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Password&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">validator</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">notNull</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;cbb&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;roleId&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Role&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">grid</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">md</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">},</span>
+<span class="w">          </span><span class="nx">sk</span><span class="o">:</span><span class="w"> </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbRole</span><span class="p">,</span><span class="w"> </span><span class="nx">nv</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">},</span>
+<span class="w">          </span><span class="nx">validator</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">notNull</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">TierComboField</span><span class="o">&lt;</span><span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">,</span><span class="w"> </span><span class="nx">CompOpts</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;cbb&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">field</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;orgId&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="o">:</span><span class="w"> </span><span class="nx">L</span><span class="p">(</span><span class="s1">&#39;Organization&#39;</span><span class="p">),</span>
+<span class="w">          </span><span class="nx">grid</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">md</span><span class="o">:</span><span class="w"> </span><span class="mf">5</span><span class="p">},</span>
+<span class="w">          </span><span class="nx">sk</span><span class="o">:</span><span class="w"> </span><span class="nx">Protocol</span><span class="p">.</span><span class="nx">sk</span><span class="p">.</span><span class="nx">cbbOrg</span><span class="p">,</span><span class="w"> </span><span class="nx">nv</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">},</span>
+<span class="w">          </span><span class="nx">validator</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">notNull</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">TierComboField</span><span class="o">&lt;</span><span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">,</span><span class="w"> </span><span class="nx">CompOpts</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">]</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AnlistColAttrs</span><span class="o">&lt;</span><span class="nx">JSX</span><span class="p">.</span><span class="nx">Element</span><span class="p">,</span><span class="w"> </span><span class="nx">CompOpts</span><span class="o">&gt;</span><span class="p">[];</span>
+</pre></div>
+</div>
+<img alt="_images/form.png" src="_images/form.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>type为text表示文本框，password为密码框，cbb为下拉框（配置了sk，会自动填充下拉数据）</p>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">6.8. </span>提交form表单<a class="headerlink" href="#id8" title="此标题的永久链接"></a></h2>
+<p>①先在 <code class="docutils literal notranslate"><span class="pre">UsersTier</span></code> 定义保存方法（新增和修改共用），举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">saveRec</span><span class="p">(</span><span class="nx">opts</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">uri</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span><span class="w"> </span><span class="nx">crud</span><span class="o">:</span><span class="w"> </span><span class="nx">CRUD</span><span class="p">;</span><span class="w"> </span><span class="nx">pkval</span><span class="o">:</span><span class="w"> </span><span class="nx">string</span><span class="p">;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">onOk</span><span class="o">:</span><span class="w"> </span><span class="nx">OnCommitOk</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">client</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">uri</span><span class="p">,</span><span class="w"> </span><span class="nx">crud</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">opts</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">crud</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">CRUD</span><span class="p">.</span><span class="nx">u</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">pkval</span><span class="p">)</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;Can&#39;t update with null ID.&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">rec</span><span class="p">.</span><span class="nx">iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// working - but why?</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">userReq</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span>
+<span class="w">          </span><span class="ow">new</span><span class="w"> </span><span class="nx">UserstReq</span><span class="p">(</span><span class="w"> </span><span class="nx">uri</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">record</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">rec</span><span class="p">,</span><span class="w"> </span><span class="nx">relations</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">collectRelations</span><span class="p">(),</span><span class="w"> </span><span class="nx">pk</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">pkval</span><span class="p">.</span><span class="nx">v</span><span class="p">})</span>
+<span class="w">          </span><span class="p">.</span><span class="nx">A</span><span class="p">(</span><span class="nx">crud</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">CRUD</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">UserstReq</span><span class="p">.</span><span class="nx">A</span><span class="p">.</span><span class="nx">insert</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">UserstReq</span><span class="p">.</span><span class="nx">A</span><span class="p">.</span><span class="nx">update</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">client</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span>
+<span class="w">          </span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">bd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">();</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">crud</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">CRUD</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span>
+<span class="w">                        </span><span class="c1">// NOTE:</span>
+<span class="w">                        </span><span class="c1">// resulving auto-k is a typicall semantic processing, don&#39;t expose this to caller</span>
+<span class="w">                        </span><span class="nx">that</span><span class="p">.</span><span class="nx">pkval</span><span class="p">.</span><span class="nx">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bd</span><span class="p">.</span><span class="nx">resulve</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">pkval</span><span class="p">.</span><span class="nx">tabl</span><span class="p">,</span><span class="w"> </span><span class="nx">that</span><span class="p">.</span><span class="nx">pkval</span><span class="p">.</span><span class="nx">pk</span><span class="p">,</span><span class="w"> </span><span class="nx">that</span><span class="p">.</span><span class="nx">rec</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">onOk</span><span class="p">(</span><span class="nx">resp</span><span class="p">);</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="k">this</span><span class="p">.</span><span class="nx">errCtx</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>②后端在 <code class="docutils literal notranslate"><span class="pre">UsersTier.java</span></code> 类定义新增方法，举例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">protected</span><span class="w"> </span><span class="n">AnsonResp</span><span class="w"> </span><span class="nf">ins</span><span class="p">(</span><span class="n">UserstReq</span><span class="w"> </span><span class="n">jreq</span><span class="p">,</span><span class="w"> </span><span class="n">IUser</span><span class="w"> </span><span class="n">usr</span><span class="p">)</span>
+<span class="w">                </span><span class="kd">throws</span><span class="w"> </span><span class="n">SemanticException</span><span class="p">,</span><span class="w"> </span><span class="n">TransException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">record</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SemanticException</span><span class="p">(</span><span class="s">&quot;Inserting a null record ...&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">ISemantext</span><span class="w"> </span><span class="n">stx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="na">instancontxt</span><span class="p">(</span><span class="n">Connects</span><span class="p">.</span><span class="na">uri2conn</span><span class="p">(</span><span class="n">jreq</span><span class="p">.</span><span class="na">uri</span><span class="p">()),</span><span class="w"> </span><span class="n">usr</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">AnResultset</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">AnResultset</span><span class="p">)</span><span class="w"> </span><span class="n">st</span><span class="p">.</span><span class="na">select</span><span class="p">(</span><span class="n">mtabl</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;u&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">col</span><span class="p">(</span><span class="n">Funcall</span><span class="p">.</span><span class="na">count</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">whereEq</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">record</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">))</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">rs</span><span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">rs</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">rs</span><span class="p">.</span><span class="na">beforeFirst</span><span class="p">().</span><span class="na">next</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SemanticException</span><span class="p">(</span><span class="s">&quot;record id doesn&#39;t exist&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">SemanticObject</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SemanticObject</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">((</span><span class="n">Insert</span><span class="p">)</span><span class="w"> </span><span class="n">jreq</span><span class="p">.</span><span class="na">nvs</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">mtabl</span><span class="p">,</span><span class="w"> </span><span class="n">usr</span><span class="p">)))</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">ins</span><span class="p">(</span><span class="n">stx</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AnsonResp</span><span class="p">().</span><span class="na">data</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="na">props</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>③前后端关联新增方法：</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">前端定义的UserstReq.A</span><a class="headerlink" href="#id11" title="此代码块的永久链接"></a></div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="w">     </span><span class="k">static</span><span class="w"> </span><span class="nx">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nx">records</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;records&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">rec</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;rec&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="nx">update</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;u&#39;</span><span class="p">,</span>
+<span class="hll"><span class="w">             </span><span class="nx">insert</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span>
+</span><span class="w">             </span><span class="nx">del</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">,</span>
+<span class="w">     </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">后端定义的UserstReq.A</span><a class="headerlink" href="#id12" title="此代码块的永久链接"></a></div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="cm">/** Ask for loading records */</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">records</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;records&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="cm">/** Ask for loading a rec */</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;rec&quot;</span><span class="p">;</span>
+
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;u&quot;</span><span class="p">;</span>
+<span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">avatar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;u/avatar&quot;</span><span class="p">;</span>
+<span class="hll"><span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">insert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">;</span>
+</span><span class="w">             </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p>演示地址： <a class="reference external" href="http://192.168.0.85:4000/login.html">http://192.168.0.85:4000/login.html</a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="menus.html" class="btn btn-neutral float-left" title="5. 菜单配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, hjp.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

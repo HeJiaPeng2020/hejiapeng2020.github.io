@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 菜单配置 &mdash; anclient-session 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="6. 用户管理" href="user.html" />
+    <link rel="prev" title="4. 首页配置" href="home.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            anclient-session
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">3. 登录配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">4. 首页配置</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 菜单配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">5.1. 菜单表配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">5.2. 菜单树配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">5.3. 菜单关联组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">5.4. 菜单路由</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">6. 用户管理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">anclient-session</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>菜单配置</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>菜单配置<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>菜单表配置<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<img alt="_images/table.png" src="_images/table.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<ul class="simple">
+<li><p>parentId为空的是父节点</p></li>
+<li><p>根节点的排序根据 sibling</p></li>
+<li><p>同一个父节点的子节点排序根据 sibling</p></li>
+<li><p>子节点的fullpath = 父节点的fullpath + 子节点的sibling</p></li>
+</ul>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.2. </span>菜单树配置<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>在首页 <code class="docutils literal notranslate"><span class="pre">app.tsx</span></code> 中添加请求菜单的后台Servlet，举例：menu.serv</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">anReact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AnReactExt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">anClient</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">errorCtx</span><span class="p">)</span>
+<span class="w">                     </span><span class="p">.</span><span class="nx">extendPorts</span><span class="p">({</span>
+<span class="w">                             </span><span class="nx">menu</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;menu.serv&quot;</span><span class="p">,</span>
+<span class="w">                             </span><span class="nx">userstier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;users.tier&quot;</span><span class="p">,</span>
+<span class="w">                             </span><span class="nx">gpatier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gpa.tier&quot;</span><span class="p">,</span>
+<span class="w">                             </span><span class="nx">mykidstier</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;mykids.tier&quot;</span>
+<span class="w">                     </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>在后台 <code class="docutils literal notranslate"><span class="pre">dataset.xml</span></code> 中配置获取菜单树的sk，举例：sys.menu.jsample</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;c&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sk&gt;</span>sys.menu.jsample<span class="nt">&lt;/sk&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mysql&gt;</span>SELECT<span class="w"> </span>funcId,<span class="w"> </span>parentId,<span class="w"> </span>funcName,<span class="w"> </span>funcUrl<span class="w"> </span>url,<span class="w"> </span>sibling<span class="w"> </span>sort,<span class="w"> </span>fullpath,<span class="w"> </span>css,<span class="w"> </span>flags
+<span class="w">                </span>FROM<span class="w"> </span>a_sys_functions<span class="w"> </span>f<span class="w"> </span>order<span class="w"> </span>by<span class="w"> </span>f.fullpath
+<span class="w">        </span><span class="nt">&lt;/mysql&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sqlit&gt;</span>SELECT<span class="w"> </span>funcId,<span class="w"> </span>parentId,<span class="w"> </span>funcName,<span class="w"> </span>url,<span class="w"> </span>sibling<span class="w"> </span>sort,<span class="w"> </span>fullpath,<span class="w"> </span>css,<span class="w"> </span>flags
+<span class="w">                </span>FROM<span class="w"> </span>a_functions<span class="w"> </span>f<span class="w"> </span>order<span class="w"> </span>by<span class="w"> </span>f.fullpath
+<span class="w">        </span><span class="nt">&lt;/sqlit&gt;</span>
+<span class="w">        </span><span class="nt">&lt;s-tree&gt;</span>,a_sys_functions,funcId<span class="w"> </span>id,parentId,funcName<span class="w"> </span>text,,,false<span class="nt">&lt;/s-tree&gt;</span>
+<span class="nt">&lt;/c&gt;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>&lt;s-tree&gt;有严格的参数顺序，每个参数之间用英文逗号分割 <code class="docutils literal notranslate"><span class="pre">,</span></code></p>
+<ul class="simple">
+<li><p>第一位表示节点是否被选中</p></li>
+<li><p>第二位是表名</p></li>
+<li><p>第三位是主键的字段名</p></li>
+<li><p>第四位是父级主键的字段名</p></li>
+<li><p>第五位是fullpath</p></li>
+<li><p>第六位是sort</p></li>
+<li><p>第七位是节点名称</p></li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">5.3. </span>菜单关联组件<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>在首页 <code class="docutils literal notranslate"><span class="pre">app.tsx</span></code> 中添加菜单与组件的对应关系，举例：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">SysComp</span><span class="p">.</span><span class="nx">extendLinks</span><span class="p">([</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/sys/domain&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">Domain</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/sys/roles&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">Roles</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/sys/orgs&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">Orgs</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/sys/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">jsample</span><span class="p">.</span><span class="nx">Userst</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/tier/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">comp</span><span class="o">:</span><span class="w"> </span><span class="nx">jsample</span><span class="p">.</span><span class="nx">Userst</span><span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>注意此处的 path 就是菜单表配置的 url，comp 就是</p>
+</div>
+<p>点击菜单后，首页的右边区域就会根据菜单的 url，找到对应的组件并生成它：</p>
+<img alt="_images/menu.png" src="_images/menu.png" />
+</section>
+<section id="id5">
+<h2><span class="section-number">5.4. </span>菜单路由<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p>新的框架没有用 react-router，用的自定义路由匹配，当找到与url完全匹配的组件，就渲染它：</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">route</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">TagName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_comps</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">currentPage</span><span class="o">?</span><span class="p">.</span><span class="nx">url</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;/home&#39;</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">TagName</span><span class="p">)</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">TagName</span>
+<span class="w">                  </span><span class="nx">uri</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">currentPage</span><span class="o">?</span><span class="p">.</span><span class="nx">url</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">}</span>
+<span class="w">                  </span><span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">currentPage</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span>
+<span class="w">                  </span><span class="nx">ssInf</span><span class="o">=</span><span class="p">{(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AnContextType</span><span class="p">).</span><span class="nx">anClient</span><span class="o">?</span><span class="p">.</span><span class="nx">ssInf</span><span class="p">}</span>
+<span class="w">                  </span><span class="o">/&gt;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">Home</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>效果和 react 精准匹配路由是一样，且当前 uri 和其它属性一并传给了该组件</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="home.html" class="btn btn-neutral float-left" title="4. 首页配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="user.html" class="btn btn-neutral float-right" title="6. 用户管理" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, hjp.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

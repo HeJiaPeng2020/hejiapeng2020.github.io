@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>anclient-session使用文档 &mdash; anclient-session 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="1. 前端部署" href="deploy-front.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            anclient-session
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">3. 登录配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">4. 首页配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">5. 菜单配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">6. 用户管理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">anclient-session</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">anclient-session使用文档</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="anclient-session">
+<h1>anclient-session使用文档<a class="headerlink" href="#anclient-session" title="此标题的永久链接"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy-front.html#id2">1.1. 下载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy-front.html#id3">1.2. 安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy-front.html#id4">1.3. 启动</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deploy-back.html#id2">2.1. 下载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy-back.html#id3">2.2. 导入</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy-back.html#id4">2.3. 部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy-back.html#id5">2.4. 启动</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">3. 登录配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="login.html#id2">3.1. 前端配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="login.html#id3">3.2. 后端继承</a></li>
+<li class="toctree-l2"><a class="reference internal" href="login.html#id4">3.3. 登录页面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="login.html#id5">3.4. 登录成功</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">4. 首页配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="home.html#sk">4.1. 关联sk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#id2">4.2. 全局变量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#id3">4.3. 主题样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="home.html#id4">4.4. 图标样式</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">5. 菜单配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="menus.html#id2">5.1. 菜单表配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menus.html#id3">5.2. 菜单树配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menus.html#id4">5.3. 菜单关联组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menus.html#id5">5.4. 菜单路由</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">6. 用户管理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id2">6.1. 添加数据入口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id3">6.2. 定义查询组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id4">6.3. 定义查询方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id5">6.4. 关联前后端</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id6">6.5. 调用表格组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id7">6.6. 定义表格的列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#form">6.7. 定义form表单</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#id8">6.8. 提交form表单</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="deploy-front.html" class="btn btn-neutral float-right" title="1. 前端部署" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, hjp.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

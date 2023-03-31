@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. 登录配置 &mdash; anclient-session 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="4. 首页配置" href="home.html" />
+    <link rel="prev" title="2. 后端部署" href="deploy-back.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            anclient-session
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deploy-front.html">1. 前端部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy-back.html">2. 后端部署</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. 登录配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">3.1. 前端配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.2. 后端继承</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.3. 登录页面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">3.4. 登录成功</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="home.html">4. 首页配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">5. 菜单配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">6. 用户管理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">anclient-session</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>登录配置</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">3. </span>登录配置<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="id2">
+<h2><span class="section-number">3.1. </span>前端配置<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>修改dist目录下的 <code class="docutils literal notranslate"><span class="pre">github.json</span></code> 文件，使其指向后台地址，举例：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:8080/jserv-sample&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>login.html 页面配置：</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;minimum-scale=1, initial-scale=1, width=device-width&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>AnClient for react test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;login&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span>You need to enable JavaScript to run this app.<span class="p">&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;AnExt-1.0.0.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">searchParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">)</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">serv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">searchParams</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;serv&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">undefined</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">test</span><span class="p">.</span><span class="nx">LoginApp</span><span class="p">.</span><span class="nx">bindHtml</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">serv</span><span class="p">,</span><span class="w"> </span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">home</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;index.html&#39;</span><span class="p">});</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>home: ‘index.html’ 表示登录成功后的跳转页面</p>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.2. </span>后端继承<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>用户类必须继承 <code class="docutils literal notranslate"><span class="pre">io.odysz.semantic.jsession.JUser</span></code> ，然后创建内部类 SampleUserMeta，举例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">io.odysz.jsample</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.odysz.semantic.jsession.JUser</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.odysz.semantics.meta.TableMeta</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.odysz.semantics.x.SemanticException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.odysz.transact.x.TransException</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleUser</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JUser</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Hard coded field string of user table information.</span>
+<span class="cm">         * With this class, sample project&#39;s user table can be different from the default table,</span>
+<span class="cm">         * providing the same semantics presented.</span>
+<span class="cm">         * @author odys-z@github.com</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleUserMeta</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JUserMeta</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="nf">SampleUserMeta</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">conn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="kd">super</span><span class="p">(</span><span class="n">conn</span><span class="p">);</span>
+
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">tbl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a_users&quot;</span><span class="p">;</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">pk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;userId&quot;</span><span class="p">;</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">uname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;userName&quot;</span><span class="p">;</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">pswd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pswd&quot;</span><span class="p">;</span>
+<span class="w">                        </span><span class="k">this</span><span class="p">.</span><span class="na">iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;iv&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="nf">SampleUser</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">pswd</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">usrName</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SemanticException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">super</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">pswd</span><span class="p">,</span><span class="w"> </span><span class="n">usrName</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">TableMeta</span><span class="w"> </span><span class="nf">meta</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleUserMeta</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<ul class="simple">
+<li><p>this.tbl   表示用户表</p></li>
+<li><p>this.pk    表示主键字段名</p></li>
+<li><p>this.uname 表示用户名字段名</p></li>
+<li><p>this.pswd  表示密码字段名</p></li>
+<li><p>this.iv    表示加密字段名</p></li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.3. </span>登录页面<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>浏览器中输入http://localhost:4000/login.html，输入用户账号（默认账号admin/123456）：</p>
+<img alt="_images/login.png" src="_images/login.png" />
+</section>
+<section id="id5">
+<h2><span class="section-number">3.4. </span>登录成功<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p>登录成功后，则自动跳转到首页 <code class="docutils literal notranslate"><span class="pre">index.html</span></code></p>
+<img alt="_images/index.png" src="_images/index.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>如果登录时报错CORS，则需要在后端的web.xml中配置允许跨域访问：</p>
+</div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;filter&gt;</span>
+<span class="w">        </span><span class="nt">&lt;filter-name&gt;</span>CorsFilter<span class="nt">&lt;/filter-name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;filter-class&gt;</span>org.apache.catalina.filters.CorsFilter<span class="nt">&lt;/filter-class&gt;</span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param-name&gt;</span>cors.allowed.origins<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param-value&gt;</span>*<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param-name&gt;</span>cors.exposed.headers<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param-value&gt;</span>Access-Control-Allow-Origin,Access-Control-Allow-Credentials<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+<span class="nt">&lt;filter-mapping&gt;</span>
+<span class="w">        </span><span class="nt">&lt;filter-name&gt;</span>CorsFilter<span class="nt">&lt;/filter-name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/filter-mapping&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="deploy-back.html" class="btn btn-neutral float-left" title="2. 后端部署" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="home.html" class="btn btn-neutral float-right" title="4. 首页配置" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, hjp.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
